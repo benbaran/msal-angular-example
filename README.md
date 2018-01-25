@@ -90,4 +90,7 @@ Add MaterialModule to imports in app.module.ts.
 }
 
 
-
+npm install msal --save
+ng g service msal/Msal
+ng g class msal/MsalConfig
+ng g guard msal/Msal
