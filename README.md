@@ -1,27 +1,93 @@
-# MsalAngularExample
+npm install -g @angular/cli@latest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.5.
+ng new msal-angular-example --routing
 
-## Development server
+ng g component Home
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ng g component NotFound
 
-## Code scaffolding
+Edit app-routing.module.ts:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
-## Build
+const routes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: '**', component: NotFoundComponent}
+];
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
 
-## Running unit tests
+Install and Coonfigure Angular Material:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+npm install --save @angular/material @angular/cdk
 
-## Running end-to-end tests
+npm install --save @angular/animations
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Edit app.module.ts:
 
-## Further help
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@NgModule({
+  ...
+  imports: [BrowserAnimationsModule],
+  ...
+})
+
+Add to styles.css:
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+
+npm install --save hammerjs
+
+Add to main.ts:
+
+import 'hammerjs';
+
+ng g module Material
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatToolbarModule } from '@angular/material';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatToolbarModule
+  ],
+  exports: [
+    MatButtonModule,
+    MatToolbarModule
+  ],
+  declarations: []
+})
+export class MaterialModule { }
+
+Add MaterialModule to imports in app.module.ts.
+
+<mat-toolbar color="primary">
+  <span>Application Title</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+  <button mat-button>Login</button>
+  <button mat-button>Logout</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+
+
