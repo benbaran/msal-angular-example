@@ -1,16 +1,31 @@
 {
-  "name": "msal-angular-example",
-  "version": "0.0.0",
+  "name": "msal-angular",
+  "version": "1.0.1",
+  "description": "Angular MSAL wrapper.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benbaran/msal-angular.git"
+  },
+  "keywords": [
+    "MSAL",
+    "Angular"
+  ],
+  "author": "Ben Baran",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benbaran/msal-angular/issues"
+  },
+  "homepage": "https://github.com/benbaran/msal-angular#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^5.2.2",
     "@angular/cdk": "^5.1.0",
@@ -44,6 +59,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^1.6.0",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
