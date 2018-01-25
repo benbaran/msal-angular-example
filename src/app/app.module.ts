@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material/material.module';
+import { MsalService } from './msal/msal.service';
+import { MsalGuard } from './msal/msal.guard';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { MaterialModule } from './material/material.module';
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [MsalService, MsalGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

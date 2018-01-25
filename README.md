@@ -91,6 +91,30 @@ Add MaterialModule to imports in app.module.ts.
 
 
 npm install msal --save
+
 ng g service msal/Msal
 ng g class msal/MsalConfig
 ng g guard msal/Msal
+
+Add to app.module.ts:
+...
+  providers: [MsalService, MsalGuard],
+...
+
+import { MsalGuard } from './msal/msal.guard';
+
+const routes: Routes = [
+  {path: '', component: HomeComponent, canActivate: [MsalGuard]},
+  {path: '**', component: NotFoundComponent}
+];
+
+<mat-toolbar color="primary">
+  <span>Application Title</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+  <button mat-button *ngIf="!authenticated" (click)="login()">Login</button>
+  <button mat-button *ngIf="authenticated" (click)="logout()">Logout</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
