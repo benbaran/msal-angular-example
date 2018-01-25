@@ -223,7 +223,7 @@ export class AppComponent {
 }
 ```
 
-### Create and Interceptor to Pass the Token with HTTP Requests
+### Create an Interceptor to Pass the Token with HTTP Requests
 
 ng g class msal/MsalInterceptor
 
