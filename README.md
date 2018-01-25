@@ -22,6 +22,7 @@ ng g component NotFound
 
 app-routing.module.ts:
 
+```javascript
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+```
 
 ### Install and Configure Angular Material
 
@@ -46,6 +48,7 @@ npm install --save @angular/animations
 
 Add to app.module.ts:
 
+```javascript
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -53,16 +56,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   imports: [BrowserAnimationsModule],
   ...
 })
+```
 
 Add to styles.css:
 
+```css
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+```
 
 npm install --save hammerjs
 
 Add to main.ts:
 
+```javascript
 import 'hammerjs';
+```
 
 ### Create a Material Module to Import and Export Material Components
 
@@ -70,6 +78,7 @@ ng g module Material
 
 material.module.ts:
 
+```javascript
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatToolbarModule } from '@angular/material';
@@ -87,9 +96,10 @@ import { MatButtonModule, MatToolbarModule } from '@angular/material';
   declarations: []
 })
 export class MaterialModule { }
+```
 
 Add to app.module.ts:
-
+```javascript
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
@@ -97,11 +107,13 @@ import { MaterialModule } from './material/material.module';
   imports: [MaterialModule],
   ...
 })
+```
 
 ### Add a Toolbar with Login and Logout Buttons to the AppComponent
 
 app.component.html:
 
+```html
 <mat-toolbar color="primary">
   <span>Application Title</span>
 
@@ -112,12 +124,15 @@ app.component.html:
   <button mat-button>Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
+```
 
 app.component.css:
 
+```css
 .example-fill-remaining-space {
   flex: 1 1 auto;
 }
+```
 
 ### Install MSAL
 
@@ -134,23 +149,29 @@ ng g guard msal/Msal
 ### Provide MsalService and MsalGuard
 
 Add to app.module.ts:
+
+```javascript
 ...
   providers: [MsalService, MsalGuard],
 ...
+```
 
 ### Update Home Route to Use MsalGuard
 
+```javascript
 import { MsalGuard } from './msal/msal.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [MsalGuard]},
   {path: '**', component: NotFoundComponent}
 ];
+```
 
 ### Update AppComponent with Login and Logout Feautures
 
 app.component.html:
 
+```html
 <mat-toolbar color="primary">
   <span>Application Title</span>
 
@@ -161,9 +182,11 @@ app.component.html:
   <button mat-button *ngIf="authenticated" (click)="logout()">Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
+```
 
 app.component.ts:
 
+```javascript
 import { Component } from '@angular/core';
 import { MsalService } from './msal/msal.service';
 import { MsalConfig } from './msal/msal-config';
@@ -198,3 +221,4 @@ export class AppComponent {
     return this.msalService.authenticated;
   }
 }
+```
