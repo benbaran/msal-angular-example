@@ -222,3 +222,54 @@ export class AppComponent {
   }
 }
 ```
+
+### Create and Interceptor to Pass the Token with HTTP Requests
+
+ng g class msal/MsalInterceptor
+
+msal-interceptor.ts:
+
+```javascript
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { MsalService } from './msal.service';
+
+@Injectable()
+export class MsalInterceptor implements HttpInterceptor {
+
+    constructor(private msalService: MsalService) { }
+
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        const JWT = `Bearer ${this.msalService.getToken()}`;
+        req = req.clone({
+            setHeaders: {
+                Authorization: JWT,
+            },
+        });
+        return next.handle(req);
+    }
+}
+```
+
+### Provide the Interceptor
+Add to app.module.ts:
+
+```javascript
+...
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+...
+
+...
+  providers:
+    [MsalService,
+      MsalGuard,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: MsalInterceptor,
+        multi: true
+      }
+    ],
+...
+```
