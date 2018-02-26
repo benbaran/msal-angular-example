@@ -1,22 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MsalModule } from 'msal-angular';
 
 import { AppComponent } from './app.component';
+import { MaterialModule } from './material/material.module';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+
+import { environment } from '../environments/environment';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { MaterialModule } from './material/material.module';
-import { MsalService } from './msal/msal.service';
-import { MsalGuard } from './msal/msal.guard';
-import { MsalInterceptor } from './msal/msal-inteceptor';
-
 
 @NgModule({
   declarations: [
     AppComponent,
+    ToolbarComponent,
     HomeComponent,
     NotFoundComponent
   ],
@@ -24,17 +25,15 @@ import { MsalInterceptor } from './msal/msal-inteceptor';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    [MsalModule.forRoot({
+      clientID: environment.clientID,
+      graphScopes: environment.graphScopes,
+      signUpSignInPolicy: environment.signUpSignInPolicy,
+      tenant: environment.tenant
+    })]
   ],
-  providers:
-    [MsalService,
-      MsalGuard,
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: MsalInterceptor,
-        multi: true
-      }
-    ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

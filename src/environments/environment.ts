@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  clientID: '57fb7914-e5e8-4d4c-a358-d097815ead0a',
+  graphScopes: ["openid", "profile"],
+  signUpSignInPolicy: '',
+  tenant: 'careportfol.io'
 };

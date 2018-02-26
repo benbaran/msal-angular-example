@@ -1,10 +1,3 @@
-<mat-toolbar color="primary">
-  <span>MSAL Angular Example</span>
+<app-toolbar></app-toolbar>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space"></span>
-
-  <button mat-button *ngIf="!authenticated" (click)="login()">Login</button>
-  <button mat-button *ngIf="authenticated" (click)="logout()">Logout</button>
-</mat-toolbar>
 <router-outlet></router-outlet>
